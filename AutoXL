@@ -1,0 +1,14 @@
+import openpyxl as xl
+from openpyxl.chart import BarChart, Reference
+
+wb1 = xl.load_workbook('Transactions_corrected.xlsx')
+sht1 = wb1['Sheet1']
+
+sht1.cell(1,4).value = "Corrected Price"
+
+values = Reference(sht1, min_row=2, max_row=4, min_col=4, max_col=4)
+chart = BarChart()
+chart.add_data(values)
+sht1.add_chart(chart, 'G4')
+
+wb1.save('Transactions_corrected.xlsx')
